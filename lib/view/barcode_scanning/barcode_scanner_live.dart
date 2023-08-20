@@ -24,7 +24,7 @@ class _BarcodeScannerLiveState extends State<BarcodeScannerLive> {
   // mlKit
   late InputImage inputImage;
 
-  // TODO declare scanner
+  // Declare scanner
   dynamic barcodeScanner;
 
   @override

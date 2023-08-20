@@ -1,6 +1,7 @@
-import 'package:barcode_scanner/barcode_scanner_live.dart';
-import 'package:barcode_scanner/barcode_scanner_manual.dart';
 import 'package:flutter/material.dart';
+
+import '../barcode_scanning/barcode_scanner_live.dart';
+import '../barcode_scanning/barcode_scanner_manual.dart';
 
 class FirstPage extends StatelessWidget {
   const FirstPage({super.key});
