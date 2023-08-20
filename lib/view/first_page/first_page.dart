@@ -1,3 +1,5 @@
+import 'package:barcode_scanner/view/face_detection/face_detection.dart';
+import 'package:barcode_scanner/view/face_detection/face_detection_live.dart';
 import 'package:flutter/material.dart';
 
 import '../barcode_scanning/barcode_scanner_live.dart';
@@ -56,6 +58,40 @@ class FirstPage extends StatelessWidget {
                     );
                   },
                   child: const Text("Barcode Scanner Live"),
+                ),
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              SizedBox(
+                width: 200,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const FaceDetection(),
+                      ),
+                    );
+                  },
+                  child: const Text("Face Detection Manual"),
+                ),
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              SizedBox(
+                width: 200,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const FaceDetectionLive(),
+                      ),
+                    );
+                  },
+                  child: const Text("Face Detection Live"),
                 ),
               ),
               const SizedBox(
