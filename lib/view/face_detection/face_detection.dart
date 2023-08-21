@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
 import 'package:image_picker/image_picker.dart';
+import 'dart:ui' as ui;
 
 import '../../config/face_painter.dart';
 
@@ -96,7 +97,9 @@ class _FaceDetectionState extends State<FaceDetection> {
   //TODO draw rectangles
   drawRectangleAroundFaces() async {
     image = await _image?.readAsBytes();
-    image = await decodeImageFromList(image);
+    ui.Image decodedImage = await decodeImageFromList(image);
+    image = decodedImage;
+
     setState(() {
       image;
       result;
