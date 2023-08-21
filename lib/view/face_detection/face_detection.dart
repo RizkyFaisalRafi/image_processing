@@ -36,7 +36,7 @@ class _FaceDetectionState extends State<FaceDetection> {
       enableClassification: true,
       enableContours: true,
       enableTracking: true,
-      performanceMode: FaceDetectorMode.fast,
+      performanceMode: FaceDetectorMode.accurate,
     );
     faceDetector = FaceDetector(options: options);
   }
@@ -78,8 +78,17 @@ class _FaceDetectionState extends State<FaceDetection> {
       print(e);
     }
 
+    for (Face f in faces) {
+      if (f.smilingProbability! > 0.5) {
+        result += "Smiling";
+      } else {
+        result += "Serious";
+      }
+    }
+
     setState(() {
       _image;
+      result;
     });
     drawRectangleAroundFaces();
   }
