@@ -1,6 +1,5 @@
 import 'package:barcode_scanner/view/about_app/about_app.dart';
 import 'package:barcode_scanner/view/face_detection/face_detection.dart';
-import 'package:barcode_scanner/view/face_detection/face_detection_live.dart';
 import 'package:flutter/material.dart';
 
 import '../barcode_scanning/barcode_scanner_live.dart';
