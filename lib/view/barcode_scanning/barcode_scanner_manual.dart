@@ -92,13 +92,25 @@ class _BarcodeScannerManualState extends State<BarcodeScannerManual> {
           case BarcodeType.wifi:
             // TODO: Handle this case wifi password.
             BarcodeWifi? barcodeWifi = barcode.value as BarcodeWifi;
-            result = "Wifi:${barcodeWifi.password!}";
+            if (barcodeWifi != null) {
+              String? ssid = barcodeWifi.ssid;
+              String? password = barcodeWifi.password;
+
+              result = "Wi-Fi SSID: $ssid\nPassword: $password";
+            } else {
+              result = "Invalid BarcodeWifi data";
+            }
             break;
           case BarcodeType.url:
             // TODO: Handle this case url.
             BarcodeUrl? barcodeUrl = barcode.value as BarcodeUrl;
 
-            result = "${barcodeUrl.url!}";
+            if (barcodeUrl != null) {
+              String? url = barcodeUrl.url;
+              result = "URL: $url";
+            } else {
+              result = "Invalid BarcodeUrl data";
+            }
             break;
           case BarcodeType.unknown:
             // TODO: Handle this case unknown.
@@ -128,18 +140,27 @@ class _BarcodeScannerManualState extends State<BarcodeScannerManual> {
             // TODO: Handle this case email.
             BarcodeEmail? barcodeEmail = barcode.value as BarcodeEmail;
 
-            String? address = barcodeEmail.address;
+            if (barcodeEmail != null) {
+              String? address = barcodeEmail.address;
 
-            result = "Email Address: $address";
+              result = "Email Address: $address";
+            } else {
+              result = "Invalid BarcodeEmail data";
+            }
 
             break;
           case BarcodeType.phone:
             // TODO: Handle this case.
             BarcodePhone? barcodePhone = barcode.value as BarcodePhone;
 
-            String? phoneNumber = barcodePhone.number;
+            if (barcodePhone != null) {
+              String? phoneNumber = barcodePhone.number;
 
-            result = "Phone Number: $phoneNumber";
+              result = "Phone Number: $phoneNumber";
+            } else {
+              result = "Invalid BarcodePhone data";
+            }
+
             break;
           case BarcodeType.product:
             // TODO: Handle this case product.
@@ -151,18 +172,21 @@ class _BarcodeScannerManualState extends State<BarcodeScannerManual> {
             break;
           case BarcodeType.sms:
             // TODO: Handle this case sms.
-            BarcodeSMS? barcodeSMS = barcode.value as BarcodeSMS;
+            final BarcodeSMS? barcodeSMS = barcode.value as BarcodeSMS?;
 
-            String? phoneNumber = barcodeSMS.phoneNumber;
-            String? message = barcodeSMS.message;
+            if (barcodeSMS != null) {
+              String? phoneNumber = barcodeSMS.phoneNumber;
+              String? message = barcodeSMS.message;
 
-            result = "Phone Number: $phoneNumber\nMessage: $message";
+              result = "Phone Number: $phoneNumber\nMessage: $message";
+            } else {
+              result = "Invalid BarcodeSMS data";
+            }
+
             break;
           case BarcodeType.text:
             // TODO: Handle this case text.
-            BarcodeValue? barcodeValue = barcode.value as BarcodeValue;
-
-            String? textValue = barcodeValue.toString();
+            String? textValue = barcode.rawValue;
 
             result = "Text: $textValue";
             break;
@@ -210,6 +234,7 @@ class _BarcodeScannerManualState extends State<BarcodeScannerManual> {
 
             break;
         }
+
         //  suatu perangkat lunak atau kode program telah menyelesaikan penggunaan objek "scanner".
         barcodeScanner.close();
 
