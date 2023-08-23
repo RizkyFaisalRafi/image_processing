@@ -109,7 +109,7 @@ class _BarcodeScannerManualState extends State<BarcodeScannerManual> {
 
             if (barcodeUrl != null) {
               String? url = barcodeUrl.url;
-              result = "URL: $url";
+              result = "$url";
             } else {
               result = "Invalid BarcodeUrl data";
             }
@@ -251,7 +251,7 @@ class _BarcodeScannerManualState extends State<BarcodeScannerManual> {
   Widget build(BuildContext context) {
     // Launch URL
     void launchURL(String? url) async {
-      // Menghapus skema yang ada (jika ada)
+      // Menghapus skema yang ada ((http atau https))
       url = url?.replaceAll(RegExp(r'^(http:\/\/|https:\/\/)'), '');
       final Uri linkUrl = Uri(scheme: 'https', path: url);
 
