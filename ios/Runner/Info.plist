@@ -6,7 +6,6 @@
 		<string>your usage description here</string>
 		<key>NSMicrophoneUsageDescription</key>
 		<string>your usage description here</string>
-		
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
 		<key>CFBundleDisplayName</key>
@@ -59,5 +58,7 @@
 			<string>mailto</string>
 			<string>https</string>
 		</array>
+		<key>UIStatusBarHidden</key>
+		<false/>
 	</dict>
 </plist>

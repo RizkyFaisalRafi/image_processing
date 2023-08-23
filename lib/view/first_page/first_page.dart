@@ -1,3 +1,4 @@
+import 'package:barcode_scanner/view/about_app/about_app.dart';
 import 'package:barcode_scanner/view/face_detection/face_detection.dart';
 import 'package:barcode_scanner/view/face_detection/face_detection_live.dart';
 import 'package:flutter/material.dart';
@@ -74,12 +75,29 @@ class FirstPage extends StatelessWidget {
                       ),
                     );
                   },
-                  child: const Text("Face Detection Manual"),
+                  child: const Text("Face Detection"),
                 ),
               ),
               const SizedBox(
                 height: 12,
               ),
+              // SizedBox(
+              //   width: 200,
+              //   child: ElevatedButton(
+              //     onPressed: () {
+              //       Navigator.push(
+              //         context,
+              //         MaterialPageRoute(
+              //           builder: (context) => const FaceDetectionLive(),
+              //         ),
+              //       );
+              //     },
+              //     child: const Text("Face Detection Live"),
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 12,
+              // ),
               SizedBox(
                 width: 200,
                 child: ElevatedButton(
@@ -87,20 +105,10 @@ class FirstPage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const FaceDetectionLive(),
+                        builder: (context) => const AboutApp(),
                       ),
                     );
                   },
-                  child: const Text("Face Detection Live"),
-                ),
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              SizedBox(
-                width: 200,
-                child: ElevatedButton(
-                  onPressed: () {},
                   child: const Text("About This App"),
                 ),
               ),

@@ -57,14 +57,14 @@ class _FaceDetectionState extends State<FaceDetection> {
   }
 
   // TODO choose image using gallery
-  _imgFromGallery() async {
-    XFile? pickedFile =
-        await imagePicker.pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      _image = File(pickedFile.path);
-      doFaceDetection();
-    }
-  }
+  // _imgFromGallery() async {
+  //   XFile? pickedFile =
+  //       await imagePicker.pickImage(source: ImageSource.gallery);
+  //   if (pickedFile != null) {
+  //     _image = File(pickedFile.path);
+  //     doFaceDetection();
+  //   }
+  // }
 
   // TODO face detection code here
   doFaceDetection() async {
@@ -124,34 +124,13 @@ class _FaceDetectionState extends State<FaceDetection> {
               child: Stack(children: <Widget>[
                 Center(
                   child: ElevatedButton(
-                    onPressed: _imgFromGallery,
-                    onLongPress: _imgFromCamera,
+                    // onPressed: _imgFromGallery,
+                    // onLongPress: _imgFromCamera,
+                    onPressed: _imgFromCamera,
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.transparent,
                         shadowColor: Colors.transparent),
-                    child:
-                        // Container(
-                        //   margin: const EdgeInsets.only(top: 8),
-                        //   child: _image != null
-                        //       ? Image.file(
-                        //           _image!,
-                        //           width: 335,
-                        //           height: 495,
-                        //           fit: BoxFit.fill,
-                        //         )
-                        //       : Container(
-                        //           width: 340,
-                        //           height: 330,
-                        //           color: Colors.black,
-                        //           child: const Icon(
-                        //             Icons.camera_alt,
-                        //             color: Colors.white,
-                        //             size: 100,
-                        //           ),
-                        //         ),
-                        // ),
-
-                        Container(
+                    child: Container(
                       width: 335,
                       height: 495,
                       margin: const EdgeInsets.only(

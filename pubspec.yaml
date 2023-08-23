@@ -38,7 +38,6 @@ dependencies:
   # Image Picker for add photo
   image_picker: ^1.0.2
   # Scanning Barcode
-  # google_mlkit_barcode_scanning: ^0.9.0
   google_mlkit_barcode_scanning: ^0.4.0
   # Running Url
   url_launcher: ^6.1.12
@@ -46,7 +45,33 @@ dependencies:
   camera: ^0.10.5+3
   # Scanning Face Detection
   google_mlkit_face_detection: ^0.4.0
+  # FlutterNativeSplash for SplashScreen
+  flutter_native_splash: ^2.3.1
+  # Change Icon App
+  flutter_launcher_icons: ^0.13.1
+
+flutter_native_splash:
+  android: true
+  ios: true
+  web: false
+
+  color: "#FFFFFF"
+  image: "images/logo_splash.png"
+  color_dark: "#272727"
+  image_dark: "images/logo_splash.png"
+
+  android_12:
+    image: "images/logo_splash.png"
+    icon_background_color: "#FFFFFF"
+    image_dark: "images/logo_splash.png"
+    icon_background_color_dark: "#272727"
   
+flutter_launcher_icons:
+  android: "launcher_icon_imgpro"
+  ios: true
+  image_path: "images/logo_splash.png"
+  min_sdk_android: 21 # android min sdk
+  background_color: "#0xffFFFFFF"
 
 dev_dependencies:
   flutter_test:
