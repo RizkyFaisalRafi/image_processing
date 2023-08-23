@@ -90,46 +90,124 @@ class _BarcodeScannerManualState extends State<BarcodeScannerManual> {
         // See API reference for complete list of supported types
         switch (type) {
           case BarcodeType.wifi:
+            // TODO: Handle this case wifi password.
             BarcodeWifi? barcodeWifi = barcode.value as BarcodeWifi;
             result = "Wifi:${barcodeWifi.password!}";
             break;
           case BarcodeType.url:
+            // TODO: Handle this case url.
             BarcodeUrl? barcodeUrl = barcode.value as BarcodeUrl;
 
             result = "${barcodeUrl.url!}";
             break;
           case BarcodeType.unknown:
-            // TODO: Handle this case.
+            // TODO: Handle this case unknown.
+            result = "Unknown barcode type: ${barcode.value}";
             break;
           case BarcodeType.contactInfo:
-            // TODO: Handle this case.
+            // TODO: Handle this case contactInfo.
+            BarcodeContactInfo? barcodeContactInfo =
+                barcode.value as BarcodeContactInfo;
+
+            String firstName = barcodeContactInfo.firstName ?? '';
+            String middleName = barcodeContactInfo.middleName ?? '';
+            String lastName = barcodeContactInfo.lastName ?? '';
+
+            String fullName = '$firstName $middleName $lastName'.trim();
+            String? phone = barcodeContactInfo.phoneNumbers.isNotEmpty
+                ? barcodeContactInfo.phoneNumbers.first.number
+                : '';
+            String? email = barcodeContactInfo.emails.isNotEmpty
+                ? barcodeContactInfo.emails.first.address
+                : '';
+
+            result =
+                "Contact Information:\nName: $fullName\nPhone: $phone\nEmail: $email";
             break;
           case BarcodeType.email:
-            // TODO: Handle this case.
-            break;
-          case BarcodeType.isbn:
-            // TODO: Handle this case.
+            // TODO: Handle this case email.
+            BarcodeEmail? barcodeEmail = barcode.value as BarcodeEmail;
+
+            String? address = barcodeEmail.address;
+
+            result = "Email Address: $address";
+
             break;
           case BarcodeType.phone:
             // TODO: Handle this case.
+            BarcodePhone? barcodePhone = barcode.value as BarcodePhone;
+
+            String? phoneNumber = barcodePhone.number;
+
+            result = "Phone Number: $phoneNumber";
             break;
           case BarcodeType.product:
+            // TODO: Handle this case product.
+
+            break;
+          case BarcodeType.isbn:
             // TODO: Handle this case.
+
             break;
           case BarcodeType.sms:
-            // TODO: Handle this case.
+            // TODO: Handle this case sms.
+            BarcodeSMS? barcodeSMS = barcode.value as BarcodeSMS;
+
+            String? phoneNumber = barcodeSMS.phoneNumber;
+            String? message = barcodeSMS.message;
+
+            result = "Phone Number: $phoneNumber\nMessage: $message";
             break;
           case BarcodeType.text:
-            // TODO: Handle this case.
+            // TODO: Handle this case text.
+            BarcodeValue? barcodeValue = barcode.value as BarcodeValue;
+
+            String? textValue = barcodeValue.toString();
+
+            result = "Text: $textValue";
             break;
           case BarcodeType.geoCoordinates:
-            // TODO: Handle this case.
+            // TODO: Handle this case geoCoordinate.
+            BarcodeGeoPoint? barcodeGeoPoint = barcode.value as BarcodeGeoPoint;
+
+            double? latitude = barcodeGeoPoint.latitude;
+            double? longitude = barcodeGeoPoint.longitude;
+
+            result = "Latitude: $latitude\nLongitude: $longitude";
             break;
           case BarcodeType.calendarEvent:
             // TODO: Handle this case.
+            BarcodeCalenderEvent? barcodeCalenderEvent =
+                barcode.value as BarcodeCalenderEvent;
+
+            String? summary = barcodeCalenderEvent.summary;
+            String? organizer = barcodeCalenderEvent.organizer;
+            String? description = barcodeCalenderEvent.description;
+            String? location = barcodeCalenderEvent.location;
+            String? start = barcodeCalenderEvent.start?.toString() ?? "N/A";
+            String? end = barcodeCalenderEvent.end?.toString() ?? "N/A";
+
+            result =
+                "Event Title: $summary\norganizer: $organizer\nDescription: $description\nLocation: $location\nStart: $start\nEnd: $end";
+
             break;
           case BarcodeType.driverLicense:
-            // TODO: Handle this case.
+            // TODO: Handle this case driverLicense.
+            BarcodeDriverLicense? barcodeDriverLicense =
+                barcode.value as BarcodeDriverLicense;
+
+            String? firstName = barcodeDriverLicense.firstName;
+            String? lastName = barcodeDriverLicense.lastName;
+            String? licenseNumber = barcodeDriverLicense.licenseNumber;
+            String? address = barcodeDriverLicense.addressCity;
+            String? birthDate = barcodeDriverLicense.birthDate;
+            String? issueDate = barcodeDriverLicense.issueDate;
+            String? expiryDate = barcodeDriverLicense.expiryDate;
+            String? gender = barcodeDriverLicense.gender;
+
+            result =
+                "Name: $firstName $lastName\nGender: $gender\nLicense Number: $licenseNumber\nAddress: $address\nBirth Date: $birthDate\nIssue Date: $issueDate\nExpiry Date: $expiryDate";
+
             break;
         }
         //  suatu perangkat lunak atau kode program telah menyelesaikan penggunaan objek "scanner".
