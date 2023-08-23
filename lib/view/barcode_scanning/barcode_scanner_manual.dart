@@ -132,6 +132,8 @@ class _BarcodeScannerManualState extends State<BarcodeScannerManual> {
             // TODO: Handle this case.
             break;
         }
+        //  suatu perangkat lunak atau kode program telah menyelesaikan penggunaan objek "scanner".
+        barcodeScanner.close();
 
         setState(() {
           result ??= "Kosong"; // Set result to "Kosong" if result is null

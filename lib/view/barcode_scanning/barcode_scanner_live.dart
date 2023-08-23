@@ -56,9 +56,11 @@ class _BarcodeScannerLiveState extends State<BarcodeScannerLive> {
               {
                 isBusy = true,
                 img = image,
-                Future.microtask(() {
-                  doBarcodeScanning();
-                })
+                Future.microtask(
+                  () {
+                    doBarcodeScanning();
+                  },
+                ),
               }
           });
       setState(() {}); // To refresh Widget
@@ -151,23 +153,41 @@ class _BarcodeScannerLiveState extends State<BarcodeScannerLive> {
     // });
   }
 
+  // TODO: GetInputImage
   InputImage getInputImage() {
+    // mengumpulkan semua byte gambar dari berbagai "plane" (bidang) gambar.
     final WriteBuffer allBytes = WriteBuffer();
+    // loop yang akan berjalan melalui setiap plane (bidang) gambar dari input img.
     for (final Plane plane in img!.planes) {
+      // Menambahkan byte gambar dari plane saat ini ke dalam objek WriteBuffer yang telah dibuat sebelumnya.
       allBytes.putUint8List(plane.bytes);
     }
+    /*
+    Setelah semua byte gambar dari semua plane telah dikumpulkan, metode done() 
+    pada objek WriteBuffer dipanggil untuk menyelesaikan pengisian byte. 
+    Hasilnya kemudian dikonversi menjadi Uint8List yang merepresentasikan semua byte gambar dari berbagai plane.
+    */
     final bytes = allBytes.done().buffer.asUint8List();
+    // Membuat objek Size yang merepresentasikan dimensi gambar (lebar dan tinggi) dari input img.
     final Size imageSize = Size(img!.width.toDouble(), img!.height.toDouble());
+    // Mengambil kamera pertama dari daftar kamera yang telah diinisialisasi sebelumnya.
     final camera = _cameras[0];
+    // Mengambil nilai rotasi gambar dari orientasi sensor kamera. Nilai rotasi ini nantinya akan digunakan dalam objek InputImageData.
     final imageRotation =
         InputImageRotationValue.fromRawValue(camera.sensorOrientation);
-    // if (imageRotation == null) return;
-
+    // Mengambil format gambar dari input img. Nilai format ini juga akan digunakan dalam objek InputImageData.
     final inputImageFormat =
         InputImageFormatValue.fromRawValue(img!.format.raw);
-    // if (inputImageFormat == null) return null;
 
+    /*
+    Loop ini digunakan untuk membuat daftar metadata plane gambar yang nantinya
+    akan digunakan dalam objek InputImageData.
+*/
     final planeData = img!.planes.map(
+      /*
+    Masing-masing plane menghasilkan objek InputImagePlaneMetadata yang berisi 
+    informasi tentang lebar, tinggi, dan bytes per baris dari plane tersebut.
+    */
       (Plane plane) {
         return InputImagePlaneMetadata(
           bytesPerRow: plane.bytesPerRow,
@@ -177,6 +197,7 @@ class _BarcodeScannerLiveState extends State<BarcodeScannerLive> {
       },
     ).toList();
 
+//  Membuat objek InputImageData yang berisi informasi tentang dimensi gambar, rotasi gambar, format gambar, dan metadata plane.
     final inputImageData = InputImageData(
       size: imageSize,
       imageRotation: imageRotation!,
@@ -184,9 +205,10 @@ class _BarcodeScannerLiveState extends State<BarcodeScannerLive> {
       planeData: planeData,
     );
 
+// Membuat objek InputImage dari byte gambar dan informasi data gambar yang telah dikumpulkan sebelumnya.
     final inputImage =
         InputImage.fromBytes(bytes: bytes, inputImageData: inputImageData);
-
+// Mengembalikan objek InputImage yang telah dibuat sebagai hasil akhir dari method getInputImage()
     return inputImage;
   }
 
